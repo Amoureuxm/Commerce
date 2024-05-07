@@ -1,0 +1,9 @@
+body{
+    background: lavender;
+    color: blue;
+}
+.user-img{
+    width: 50px;
+    clip-path: circle();
+    border: 1px solid #eee;
+}
