@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Tahoma, sans-serif;
+}
+
+html{
+    background: lavender;
+}
+
+body{
+    padding: 10px;
+    margin: 5px;
+}
+
+h1,h2{
+    color: rgb(8, 164, 102);
+    display: flex;
+}
+img{
+    height: 70px;
+    width: 70px;
+    clip-path:circle();
+    /* top: 3px; 
+    left: 2px;*/
+    display: flex;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    padding-left: 50%;
+}
+.menu{
+    list-style: none;
+    display: flex;
+    gap: 5px;
+}
+a:hover{
+    transition:cubic-bezier(0.075, 0.82, 0.165, 1);
+    color: brown;
+    font-weight: bolder;
+    cursor: grabbing;
+}
+
+textarea{
+    display: block;
+    /* clip-path: fill-box; */
+    border: none;
+    background: lavender;
+    color: brown;
+    font-size: large;
+    font-weight: bold;
+}
+textarea:focus{
+    border: none;
+}
