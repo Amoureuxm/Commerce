@@ -53,8 +53,9 @@
     // echo "Creation successful";
 //================================================================
 
+
 $client = "CREATE TABLE Clients (
-    ClientID INT PRIMARY KEY,
+    ClientID INT AUTO_INCREMENT PRIMARY KEY,
     Nom VARCHAR(200),
     Prenom VARCHAR(200),
     Adresse VARCHAR(200),
@@ -65,7 +66,7 @@ $connexion->exec($client);
 
 // Création de la table Fournisseurs
 $fournisseur = "CREATE TABLE Fournisseurs (
-	FournisseurID INT PRIMARY KEY,
+	FournisseurID INT AUTO_INCREMENT PRIMARY KEY,
     NomFournisseur VARCHAR(200),
     Adresse VARCHAR(100),
     Email VARCHAR(200),
@@ -75,7 +76,7 @@ $fournisseur = "CREATE TABLE Fournisseurs (
     
 // Creation de la table employe
 $employer = "CREATE TABLE Employes (
-	EmployeID INT PRIMARY KEY,
+	EmployeID INT AUTO_INCREMENT PRIMARY KEY,
     Nom VARCHAR(200),
     Prenom VARCHAR(200),
     Fonction VARCHAR(200),
@@ -92,7 +93,7 @@ $employer = "CREATE TABLE Employes (
  // Modification de la table Produits pour intégrer l'identifiant du fournisseur
  // Création de la table "Produits"
 $produit = "CREATE TABLE Produits (
-    ProduitID INT PRIMARY KEY,
+    ProduitID INT AUTO_INCREMENT PRIMARY KEY,
     NomProduit VARCHAR(200),
     Description TEXT,
     PrixUnitaire DECIMAL(10, 2),
@@ -103,7 +104,7 @@ $connexion->exec($produit);
 
  // Modification de la création de la table vente pour intégrer l'identifiant de l'employe
 $vente = "CREATE TABLE Ventes (
-    VenteID INT PRIMARY KEY,
+    VenteID INT AUTO_INCREMENT PRIMARY KEY,
     DateVente DATE,
     ClientID INT,
     ProduitID INT,
@@ -117,7 +118,7 @@ $vente = "CREATE TABLE Ventes (
 $connexion->exec($vente);
 echo "Creation Vente table reussi";
 
-/*
+
 
 /*$connexion->exec($client);
 $connexion->exec($fournisseur);
@@ -126,6 +127,64 @@ $connexion->exec($produit);
 $connexion->exec($vente);
 echo "Bien ajoutes";
 */
+
+$stock = "CREATE TABLE Stock(
+                            StockID INT PRIMARY KEY AUTO_INCREMENT,
+                            NomProduit VARCHAR(255),
+                            NomFournisseur VARCHAR(255) REFERENCES Fournisseurs(NomFournisseur),
+                            ProduitVendu INT,
+                            FOREIGN KEY(ProduitVendu) REFERENCES Ventes(ProduitID)
+                            )";
+        $connexion->exec($stock);
+        echo "Table stock creee";
+
+
+$importClients = "LOAD DATA INFILE 'Clients.csv'
+                    INTO TABLE Clients
+                    FIELDS TERMINATED BY ';'
+                    IGNORE 1 LINES
+                    (NumeroTelephone,Nom,Prenom,Adresse,Email);
+
+                    ";
+
+
+$importEmployes = "LOAD DATA INFILE 'Employes.csv'
+                    INTO TABLE Employes
+                    FIELDS TERMINATED BY ';'                    
+                    IGNORE 1 LINES
+                    (@dummy,Nom,Prenom,Fonction,Email,NuméroTelephone)
+
+                    ";
+
+$importProduit = "LOAD DATA INFILE 'Produits.csv'
+                    INTO TABLE Produits
+                    FIELDS TERMINATED BY ';'                    
+                    IGNORE 1 LINES
+                    (@dummy,NomProduit,Description,PrixUnitaire,FournisseurID)
+
+                    ";
+
+$importfournisseur = "LOAD DATA INFILE 'Fournisseurs.csv'
+                    INTO TABLE Fournisseurs
+                    FIELDS TERMINATED BY ';'                    
+                    IGNORE 1 LINES
+                    (@dummy,NomFournisseur,Adresse,Email,NumeroTelephone)
+
+                    ";
+
+$importVente = "LOAD DATA INFILE 'Ventes.csv'
+                    INTO TABLE Ventes
+                    FIELDS TERMINATED BY ';'                    
+                    IGNORE 1 LINES
+                    (DateVente,@dummy,@dummy,@dummy,QuantiteVendue,MontantTotal)
+
+                    ";
+                    $connexion->exec($importClients);
+                    $connexion->exec($importEmployes);
+                    $connexion->exec($importfournisseur);
+                    $connexion->exec($importProduit);
+                    $connexion->exec($importVente);
+    echo "Importation reussi";
 //==================================================================
 
 
