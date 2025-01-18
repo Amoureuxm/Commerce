@@ -10,9 +10,38 @@ body{
     background: #0c0f3b;
     color: white;
     transition: width 0.5s;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    }
+
+    /*#Dashboard:hover::after{
+        content: "Dashboard";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #333;
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+        white-space: nowrap;
+        font-size: 14px;
+        margin-top: 5px;
+        opacity: 0;
+        transform: opacity 0.3s ease;
+        z-index: 1;
+    }
+
+    #Dashboard:hover::after{
+        opacity: 1;
+    }
+*/
+ul li{
+    list-style: none;
 }
 .sidebar.retracted{
     width: 70px;
+    transform: translateX(0);
 }
 
 .sidebar .nav-item, .sidebar .tooltip{

@@ -6,6 +6,8 @@
     <title>MySql</title>
 </head>
 <body>
+
+
     <?php
     $serveur = "127.0.0.1";
     $login = "root";
@@ -14,45 +16,45 @@
     $prenom = "Daniella";
     $email = "danble@gmail.com";
 
-    
 
+    $nom = $_POST["name"];
+    $postnom = $_POST["pname"];
+    $email = $_POST["email"];
+    $produit = $_POST["Produit"] ;
 
+    $nom1 = $_POST["name1"];
+    $postnom1 = $_POST["pname1"];
+    $email1 = $_POST["email1"];
+    $produit1 = $_POST["Produit1"] ;
 
-    // $nom = $_POST["name"];
-    // $postnom = $_POST["pname"];
-    // $email = $_POST["email"];
-    // $produit = $_POST["Produit"] ;
+    $nom2 = $_POST["name2"];
+    $postnom2 = $_POST["pname2"];
+    $email2 = $_POST["email2"];
+    $produit2 = $_POST["Produit2"] ;
 
-    // $nom1 = $_POST["name1"];
-    // $postnom1 = $_POST["pname1"];
-    // $email1 = $_POST["email1"];
-    // $produit1 = $_POST["Produit1"] ;
+    $nom3 = $_POST["name3"];
+    $postnom3 = $_POST["pname3"];
+    $email3 = $_POST["email3"];
+    $produit3 = $_POST["Produit3"] ;
 
-    // $nom2 = $_POST["name2"];
-    // $postnom2 = $_POST["pname2"];
-    // $email2 = $_POST["email2"];
-    // $produit2 = $_POST["Produit2"] ;
+    $nom4 = $_POST["name4"];
+    $postnom4 = $_POST["pname4"];
+    $email4 = $_POST["email4"];
+    $produit4 = $_POST["Produit4"] ;
 
-    // $nom3 = $_POST["name3"];
-    // $postnom3 = $_POST["pname3"];
-    // $email3 = $_POST["email3"];
-    // $produit3 = $_POST["Produit3"] ;
-
-    // $nom4 = $_POST["name4"];
-    // $postnom4 = $_POST["pname4"];
-    // $email4 = $_POST["email4"];
-    // $produit4 = $_POST["Produit4"] ;
 
     try {
         
-    $connexion = new PDO("mysql:host=$serveur;dbname=commerce",$login,$password);
+    $connexion = new PDO("mysql:host=$serveur;dbname=cours_bd",$login,$password);
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     // $create = "CREATE DATABASE Commerce";
     // $connexion->exec($create);
     // echo "Creation successful";
-//================================================================
 
+
+    //CREATION TABLES ET INSERTION EN IMPORTATION DES FICHIERS
+//================================================================
 
 $client = "CREATE TABLE Clients (
     ClientID INT AUTO_INCREMENT PRIMARY KEY,
@@ -62,6 +64,7 @@ $client = "CREATE TABLE Clients (
     Email VARCHAR(200),
     NumeroTelephone VARCHAR(30)
 )";
+
 $connexion->exec($client);
 
 // Création de la table Fournisseurs
@@ -120,14 +123,6 @@ echo "Creation Vente table reussi";
 
 
 
-/*$connexion->exec($client);
-$connexion->exec($fournisseur);
-$connexion->exec($employer);
-$connexion->exec($produit);
-$connexion->exec($vente);
-echo "Bien ajoutes";
-*/
-
 $stock = "CREATE TABLE Stock(
                             StockID INT PRIMARY KEY AUTO_INCREMENT,
                             NomProduit VARCHAR(255),
@@ -139,7 +134,7 @@ $stock = "CREATE TABLE Stock(
         echo "Table stock creee";
 
 
-$importClients = "LOAD DATA INFILE 'Clients.csv'
+$importClients = "LOAD DATA INFILE 'C:/xampp/htdocs/Commerce/asset/Jour2/BasesDonnees/Clients.csv'
                     INTO TABLE Clients
                     FIELDS TERMINATED BY ';'
                     IGNORE 1 LINES
@@ -148,7 +143,7 @@ $importClients = "LOAD DATA INFILE 'Clients.csv'
                     ";
 
 
-$importEmployes = "LOAD DATA INFILE 'Employes.csv'
+$importEmployes = "LOAD DATA INFILE 'C:/xampp/htdocs/Commerce/asset/Jour2/BasesDonnees/Employes.csv'
                     INTO TABLE Employes
                     FIELDS TERMINATED BY ';'                    
                     IGNORE 1 LINES
@@ -156,7 +151,7 @@ $importEmployes = "LOAD DATA INFILE 'Employes.csv'
 
                     ";
 
-$importProduit = "LOAD DATA INFILE 'Produits.csv'
+$importProduit = "LOAD DATA INFILE 'C:/xampp/htdocs/Commerce/asset/Jour2/BasesDonnees/Produits.csv'
                     INTO TABLE Produits
                     FIELDS TERMINATED BY ';'                    
                     IGNORE 1 LINES
@@ -164,7 +159,7 @@ $importProduit = "LOAD DATA INFILE 'Produits.csv'
 
                     ";
 
-$importfournisseur = "LOAD DATA INFILE 'Fournisseurs.csv'
+$importfournisseur = "LOAD DATA INFILE 'C:/xampp/htdocs/Commerce/asset/Jour2/BasesDonnees/Fournisseurs.csv'
                     INTO TABLE Fournisseurs
                     FIELDS TERMINATED BY ';'                    
                     IGNORE 1 LINES
@@ -172,7 +167,7 @@ $importfournisseur = "LOAD DATA INFILE 'Fournisseurs.csv'
 
                     ";
 
-$importVente = "LOAD DATA INFILE 'Ventes.csv'
+$importVente = "LOAD DATA INFILE 'C:/xampp/htdocs/Commerce/asset/Jour2/BasesDonnees/Ventes.csv'
                     INTO TABLE Ventes
                     FIELDS TERMINATED BY ';'                    
                     IGNORE 1 LINES
@@ -189,14 +184,14 @@ $importVente = "LOAD DATA INFILE 'Ventes.csv'
 
 
 
-    // $insertion = "INSERT INTO Client(Nom, Postnom,Email,Produit)
-    //                 VALUES ('$nom','$postnom','$email','$produit'),
-    //                         ('$nom1','$postnom1','$email1','$produit1'),
-    //                         ('$nom2','$postnom2','$email2','$produit2'),
-    //                         ('$nom3','$postnom4','$email4','$produit4'),
-    //                         ('$nom4','$postnom4','$email4','$produit4')";
-    // $connexion->exec($insertion);
-    // echo "Data added";
+     $insertion = "INSERT INTO Clients(Nom, Prenom,Email,Adresse)
+                    VALUES ('$nom','$postnom','$email','$produit'),
+                            ('$nom1','$postnom1','$email1','$produit1'),
+                            ('$nom2','$postnom2','$email2','$produit2'),
+                            ('$nom3','$postnom4','$email4','$produit4'),
+                            ('$nom4','$postnom4','$email4','$produit4')";
+    $connexion->exec($insertion);
+    echo "Data added";
 
     // CREATION DB
     // $connexion->exec("CREATE DATABASE firstDB");
@@ -204,7 +199,7 @@ $importVente = "LOAD DATA INFILE 'Ventes.csv'
 
     // CREATION TABLE
 
-   /* $sql = "CREATE TABLE Visiteurs(
+   $sql = "CREATE TABLE Visiteurs(
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             nom VARCHAR(50),
             prenom VARCHAR(50),
@@ -213,21 +208,33 @@ $importVente = "LOAD DATA INFILE 'Ventes.csv'
     $connexion->exec($sql);
     echo"Table created";
 
-*/
 
-/*
+
+
+//AFFICHER LE RESULTAT SQL
+
 $insertion = "INSERT INTO Visiteurs(nom,prenom,email)
                 VALUES('Shadrack','Bauma','shadrack.bauma@gmail.com'),
                         ('Jonas','Nsii','jonauma@gmail.com'),
                         ('$nom','$prenom','$email')";
 $connexion->exec($insertion);
 echo"Bien ajoutes";
-*/
+
+
+$codeSql = $connexion->prepare("SELECT * FROM Clients");
+            $codeSql->execute();
+            $clientEmp = $codeSql->fetchall();
+
+            echo '<pre>';
+            print_r($clientEmp);
+            echo '<pre>';
+        
+
+
     } catch (PDOException $ex) {
         echo "Echec de connexion". $ex->getMessage();
     }
 
-    
 
     ?>
 </body>

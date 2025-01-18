@@ -2,17 +2,18 @@ let username = prompt("Entrez votre nom s'il vous plait");
 let sexe = prompt("Votre sexe ?")
 
 let heure = 17;
-let ygreet = (heure<=16) ? "Bonjour monsieur" : "Bonsoir monsieur"
-let xgreet = (heure<=16) ? "Bonjour madame" : "Bonsoir madame"
+let ygreet = (heure<=16) ? "Bonjour monsieur " : "Bonsoir monsieur "
+let xgreet = (heure<=16) ? "Bonjour madame " : "Bonsoir madame "
+
 
 
 
 switch (sexe) {
     case "F":
-        let Fgreet = document.getElementById("screen").value = xgreet + " "+ username;
+        document.getElementById("hello").innerHTML = xgreet + username;
         break;
     case "M":
-        let Mgreet = document.getElementById("screen").value = ygreet + " "+ username;
+        document.getElementById("hello").innerHTML = ygreet + username;
         break;
 
     default:
